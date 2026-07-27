@@ -12,7 +12,9 @@ This project implements and evaluates various computer vision models to classify
 │   ├── ztf_real_bogus_cnn_I.ipynb    
 |   ├── ztf_real_bogus_cnn_II.ipynb    
 │   └── ztf_real_bogus_cnn_III.ipynb    
-├── data/                                                    
+├── data/   
+|   ├── labels/
+│   └── stamps/                                                    
 ├── requirements.txt
 └── README.md
 ```
