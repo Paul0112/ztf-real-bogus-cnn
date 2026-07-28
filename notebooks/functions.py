@@ -6,6 +6,12 @@ import matplotlib.pyplot as plt
 from astropy.io import fits
 
 
+# Model performance metrics
+from sklearn.metrics import (accuracy_score, precision_score, recall_score,
+    f1_score, confusion_matrix, roc_auc_score, classification_report)
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+
 def download_stamp(oid, client, output_dir, to_delete):
     """
     Download a stamp from the ALeRCE cliente based on the 
@@ -129,3 +135,67 @@ def normalize_img(X):
     X_norm /= norms
     
     return X_norm
+
+
+def evaluate_cnn_model(model, X_test, y_test, class_names=['real', 'bogus']):
+    """
+    Helper function which evaluates a CNN model. 
+    Its show the confussion matrix and classification report
+    """
+    # model prediction
+    y_prob = model.predict(X_test)
+
+    # This block is used for the multiclass extension in notebook III
+    if y_prob.shape[1] == 1:
+        y_pred = (y_prob > 0.5).astype(int).flatten() # threshold majority
+    else:
+        y_pred = np.argmax(y_prob, axis=1) # multiclass
+
+    y_true = y_test
+
+    cm = confusion_matrix(y_true, y_pred)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=class_names)
+
+    plt.figure(figsize=(8, 6))
+    disp.plot(cmap='Blues', colorbar=True)
+    plt.title("Confussion Matrix")
+    plt.xlabel("Predicted label")
+    plt.ylabel("True label")
+    plt.show()
+
+    # (f1-score, recall, precision)
+    print("\n               ===== Classification report =====")
+    print(classification_report(y_true, y_pred, target_names=class_names, zero_division=0))
+
+
+def plot_training_history(history):
+    """
+    Helper function for ploting the loss and accuracy
+    between validation and training set 
+    """
+    plt.figure(figsize=(12, 5))
+
+    # LOSS
+    plt.subplot(1, 2, 1)
+    plt.plot(history.history['loss'], label='Train Loss')
+    plt.plot(history.history['val_loss'], label='Validation Loss')
+    plt.title('Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.grid(True)
+
+    plt.legend()
+
+    # ACCURACY
+    plt.subplot(1, 2, 2)
+    plt.plot(history.history['accuracy'], label='Train Accuracy')
+    plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+    plt.title('Accuracy')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.ylim([0.5, 1])
+    plt.legend()
+
+    plt.tight_layout()
+    plt.grid(True)
+    plt.show()
