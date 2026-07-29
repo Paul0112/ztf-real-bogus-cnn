@@ -1,3 +1,4 @@
 data/stamps/
 data/processed/X_data.npy
 notebooks/__pycache__/
+models/
