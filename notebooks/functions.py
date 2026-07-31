@@ -199,24 +199,3 @@ def plot_training_history(history):
     plt.tight_layout()
     plt.grid(True)
     plt.show()
-
-
-def comp_thresh(y_probs, y_test, t_mat, t_cient):
-    '''
-    Auxiliary function to compare different decision thresholds for the sigmoid activation. 
-    It takes two threshold values: a mathematical one (optimal point of curve intersection) 
-    and a domain-specific one (prioritizing the reduction of false negatives). 
-    The function compares the effect of each threshold on precision and other relevant metrics
-    '''
-
-    # Math 
-    print(f"Optimal Threshold {t_mat} (math) ===")
-    acc_MAT = accuracy_score(y_test, y_probs > t_mat)
-    print(f"Accuracy: {acc_MAT}")
-    print(confusion_matrix(y_test, y_probs > t_mat))
-
-    # Science
-    print(f"\nOptimal Threshold {t_cient} (science) ===")
-    acc_SCI = accuracy_score(y_test, y_probs > t_cient)
-    print(f"Accuracy: {acc_SCI}")
-    print(confusion_matrix(y_test, y_probs > t_cient))
