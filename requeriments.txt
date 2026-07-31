@@ -1,6 +1,13 @@
 numpy
 pandas
 matplotlib
+seaborn
 astropy
-astroquery
+alerce
+sqlalchemy
+psycopg2-binary
+requests
 scikit-learn
+tensorflow
+tqdm
+jupyter
