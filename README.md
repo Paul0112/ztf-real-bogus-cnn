@@ -3,7 +3,7 @@
 This project implements and evaluates computer vision models to classify astronomical events from the Zwicky Transient Facility (ZTF) survey. The main objective is to perform real-bogus classification using 63×63 pixel triplet images (science, reference, and difference) via ALeRCE broker. Additionally, it extends to multiclass classification (transient, periodic, stochastic) and includes transfer learning experiments using MobileNetV2 and Braai.
 
 <p align="center">
-  <img src="figures/stamp_display_02.png" alt="Naive H-R diagram (1/parallax)" width="1000">
+  <img src="figures/stamp_display_02.png" alt="Naive H-R diagram (1/parallax)" width="900">
 </p>
 <p align="center"><em>.fits file example which contains a triplet of images to train a CNN.</em></p>
 
@@ -73,7 +73,7 @@ Notebook II depends on `data/processed/X_data.npy` and
 
 
 <p align="center">
-  <img src="figures/model_comparison.png" alt="Naive H-R diagram (1/parallax)" width="900">
+  <img src="figures/model_comparison.png" alt="Naive H-R diagram (1/parallax)" width="750">
 </p>
 <p align="center"><em>CNN strategies evaluated.</em></p>
 
